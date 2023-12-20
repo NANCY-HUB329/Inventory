@@ -22,12 +22,12 @@ namespace Inventory.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetAllProducts()
-        {
-            var products = await _productService.GetAllProducts();
-            return Ok(products);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<List<Product>>> GetAllProducts()
+        //{
+        //    var products = await _productService.GetAllProducts();
+        //    return Ok(products);
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(Guid id)
@@ -39,6 +39,13 @@ namespace Inventory.Controllers
                 return NotFound("Product Not Found");
             }
             return Ok(product);
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<ProductResponseDTO>>> GetAllProducts(int page = 1, int pageSize = 10)
+        {
+            var products = await _productService.GetAllProductsAsync(page, pageSize);
+            var productDTOs = _mapper.Map<List<ProductResponseDTO>>(products);
+            return Ok(productDTOs);
         }
 
         [HttpPost]
@@ -66,6 +73,15 @@ namespace Inventory.Controllers
             var response = await _productService.UpdateProduct(updatedProduct);
             return Ok(response);
         }
+
+        [HttpGet("filter")]
+        public ActionResult<List<ProductResponseDTO>> FilterProducts([FromQuery] string productName, [FromQuery] decimal? price)
+        {
+            var filteredProducts = _productService.FilterProducts(productName, price);
+            var productDTOs = _mapper.Map<List<ProductResponseDTO>>(filteredProducts);
+            return Ok(productDTOs);
+        }
+
 
         [HttpDelete("{id}")]
         [Authorize(Policy = "AdminPolicy")]

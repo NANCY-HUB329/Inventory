@@ -8,8 +8,8 @@ namespace Inventory.Model
     {
         [Key]
         public int OrderId { get; set; }
-        public string OrderName { get; set; }
-        public string OrderQuantity { get; set; }
+        public string? OrderName { get; set; }
+        public string? OrderQuantity { get; set; }
         public int UnitPrice { get; set; }
         public decimal TotalPrice { get; set; }
         [ForeignKey("Product")]

@@ -13,7 +13,32 @@ namespace Inventory.Services
         {
             _context = context;
         }
+        public async Task<List<Product>> GetAllProductsAsync(int page, int pageSize)
+        {
 
+            int skip = (page - 1) * pageSize;
+
+
+            return await _context.Products.Skip(skip).Take(pageSize).ToListAsync();
+        }
+
+        public List<Product> FilterProducts(string productName, decimal? price)
+        {
+            var query = _context.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(productName))
+            {
+                query = query.Where(p => p.ProductName.Contains(productName));
+            }
+
+            if (price.HasValue)
+            {
+                query = query.Where(p => p.ProductPrice == price.Value);
+            }
+
+
+            return query.ToList();
+        }
         public async Task<string> AddProduct(Product product)
         {
             await _context.Products.AddAsync(product);

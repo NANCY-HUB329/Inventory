@@ -54,7 +54,6 @@ C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\Inventory.Assemb
 C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\Inventory.csproj.CoreCompileInputs.cache
 C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\Inventory.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\Inventory.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\Inventory.sourcelink.json
 C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\staticwebassets.build.json
 C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\staticwebassets.development.json
 C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\staticwebassets\msbuild.Inventory.Microsoft.AspNetCore.StaticWebAssets.props
@@ -69,3 +68,4 @@ C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\refint\Inventory
 C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\Inventory.pdb
 C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\Inventory.genruntimeconfig.cache
 C:\Users\Nancy\Desktop\my c projects\Inventory\obj\Debug\net7.0\ref\Inventory.dll
+C:\Users\Nancy\Desktop\my c projects\Inventory\bin\Debug\net7.0\Global.json

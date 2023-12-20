@@ -7,16 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
-
-
-    {
+   
         [Route("api/[controller]")]
         [ApiController]
         public class UsersController : ControllerBase
-        {
+        {           
             private readonly IMapper _mapper;
             private readonly IUser _userService;
             private readonly IJwt _jwtService;
@@ -65,5 +60,5 @@ namespace Inventory.Controllers
             }
         }
     }
-}
+
 

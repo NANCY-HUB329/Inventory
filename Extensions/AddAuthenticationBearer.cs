@@ -8,6 +8,8 @@ namespace Inventory.Extensions
     {
         public static WebApplicationBuilder AddAuth(this WebApplicationBuilder builder)
         {
+            var secretKey = builder.Configuration.GetSection("JwtOptions:SecretKey").Value;
+
             builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new()
@@ -18,8 +20,11 @@ namespace Inventory.Extensions
 
                     ValidAudience = builder.Configuration.GetSection("JwtOptions:Audience").Value,
                     ValidIssuer = builder.Configuration.GetSection("JwtOptions:Issuer").Value,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtOptions:SecretKey").Value))
+
+
+                    IssuerSigningKey = secretKey != null
+                        ? new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                        : null
                 };
             });
 
@@ -27,5 +32,3 @@ namespace Inventory.Extensions
         }
     }
 }
-
-

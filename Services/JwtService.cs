@@ -1,4 +1,5 @@
 ﻿using Inventory.Model;
+using Inventory.Services.IServices;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Inventory.Services
 {
-    public class JwtService
+    public class JwtService : IJwt
     {
 
 
@@ -22,37 +23,39 @@ namespace Inventory.Services
 
         public string GenerateToken(User user)
         {
-            // Read JWT options from appsettings.json
+
             var secretKey = _configuration.GetSection("JwtOptions:SecretKey").Value;
             var audience = _configuration.GetSection("JwtOptions:Audience").Value;
             var issuer = _configuration.GetSection("JwtOptions:Issuer").Value;
 
-            // Create claims for the user
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Name, user.Name),
-                // Add other claims as needed (e.g., roles)
+
             };
 
-            // Create symmetric security key from the secret key
+
+            if (secretKey == null)
+            {
+
+                throw new InvalidOperationException("JwtOptions:SecretKey is not configured");
+            }
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
 
-            // Create signing credentials
+
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            // Create JWT token descriptor
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Issuer = issuer,
                 Audience = audience,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddHours(3), // Token expiration time
+                Expires = DateTime.UtcNow.AddHours(6),
                 SigningCredentials = credentials
             };
 
-            // Create and return the JWT token
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
 

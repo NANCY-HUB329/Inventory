@@ -3,19 +3,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Data
 {
-
     public class InventoryContext : DbContext
     {
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<User> Users { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public InventoryContext(DbContextOptions<InventoryContext> options)
+            : base(options)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-GNVRFJ8;Initial Catalog=Inventory;Integrated Security=True;Pooling=False");
         }
+
+        public DbSet<Product>? Products { get; set; }
+        public DbSet<Order>? Orders { get; set; }
+        public DbSet<User>? Users { get; set; }
     }
-
 }
-
-
